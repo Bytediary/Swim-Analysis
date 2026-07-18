@@ -3,6 +3,7 @@ from scipy import stats
 df_swimming=pd.read_csv("Swim_Data.csv")
 #Add the condition for when it is a person's first time swimming that event and they won't have a seed time.
 df_swimming["Seed_Time_Seconds"]=df_swimming["Seed_Time_Seconds"].fillna("N/A(First Time)")
+
 #Goal 1: Create helper columns that help you find in percentage and seconds how much time you dropped or increased.
 #There are some string(object) values of the column Seed_Time_Seconds so i have to do the following code to get rid of that.
 clean_data=df_swimming[df_swimming["Seed_Time_Seconds"]!="N/A(First Time)"].copy() #.copy() in this case stops us for getting SettingWithCopyWarning.
