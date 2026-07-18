@@ -1,5 +1,6 @@
 import pandas as pd
 from scipy import stats
+import matplotlib.pyplot as plt 
 df_swimming=pd.read_csv("Swim_Data.csv")
 #Add the condition for when it is a person's first time swimming that event and they won't have a seed time.
 df_swimming["Seed_Time_Seconds"]=df_swimming["Seed_Time_Seconds"].fillna("N/A(First Time)")
@@ -14,3 +15,4 @@ df_swimming["Percentage_Improvement"]=round((df_swimming["Seconds_Dropped"]/clea
 df_swimming["Seconds_Dropped"]=df_swimming["Seconds_Dropped"].fillna("N/A(First Time)")
 df_swimming["Percentage_Improvement"]=df_swimming["Percentage_Improvement"].fillna("N/A(First Time)")
 print(df_swimming.to_string()) #.to_String() to print the whole DataFrame at once.
+
