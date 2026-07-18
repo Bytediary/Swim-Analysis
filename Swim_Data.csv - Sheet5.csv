@@ -1,4 +1,4 @@
-Date,Age,Age_Group,Meet_Type,Pool_Measure,Event,Seed_Time_Seconds,Final_Time_Seconds,Air_Temp_F,Wind_Speed_MPH,Wind_Gust_MPH,Cloud_Cover,Wind_Chill_F
+Date,Age,Age_Group,Meet_Type,Pool_Measure,Event,Seed_Time_Seconds,Final_Time_Seconds,Air_Temp_F,Wind_Speed_MPH,Wind_Gust_MPH,Cloud_Cover_Percentage,Wind_Chill_F
 03/14/2025,10,10 and Under,Championship,SCY,50_Free,32.88,32.11,62,9,16,40,61
 03/14/2025,10,10 and Under,Championship,SCY,50_Fly,33.51,34.22,62,9,16,40,61
 03/15/2025,10,10 and Under,Championship,SCY,100_Fly,77.57,81.65,65,8,14,25,65
