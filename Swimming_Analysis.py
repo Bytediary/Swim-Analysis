@@ -17,3 +17,33 @@ df_swimming["Seconds_Dropped"]=df_swimming["Seconds_Dropped"].fillna("N/A(First 
 df_swimming["Percentage_Improvement"]=df_swimming["Percentage_Improvement"].fillna("N/A(First Time)")
 print(df_swimming.to_string()) #.to_String() to print the whole DataFrame at once.
 
+
+#Goal 2: Create a Bar Chart and see if there is a relationship(p-value) between the Meet_Type and the Percentage_Improvement.
+meet_type=dict()
+clean_data=df_swimming[df_swimming["Percentage_Improvement"]!="N/A(First Time)"].copy()
+clean_data["Percentage_Improvement"]=pd.to_numeric(clean_data["Percentage_Improvement"],errors="coerce")
+for type in clean_data["Meet_Type"].unique():
+    type_average=round(clean_data[clean_data["Meet_Type"]==type]["Percentage_Improvement"].mean(),2)
+    meet_type[type]=float(type_average)
+plt.bar(x=meet_type.keys(),height=meet_type.values(),color="teal",edgecolor="blue")
+plt.title("Does Type Of Meet Affect Performance?")
+plt.xlabel("Type of Meet")
+plt.ylabel("Average Percentage Improvement")
+plt.show() # Even though the bar chart is showing that there is less improvement when swimming in championship meets, keep in mind that there are less championship meets in the csv compared to invitational meets.
+
+#Running the sample t-tests including the fact that there might be more than two types of meets:
+keys=list(meet_type.keys())
+p_val=dict()
+t_stat=dict()
+for type in keys:
+    baseline=clean_data[clean_data["Meet_Type"]==type]["Percentage_Improvement"]
+    for helper in keys:
+        if helper!=type:
+            comparer=clean_data[clean_data["Meet_Type"]==helper]["Percentage_Improvement"]
+            t_helper,p_helper=stats.ttest_ind(comparer,baseline,equal_var=False)
+            p_val[(helper,type)]=round(float(p_helper),2)
+            t_stat[(helper,type)]=round(float(t_helper),2)
+    if len(keys)==0:
+        break
+print("This is the t-statistic for the following meets: ", t_stat) # The T-statistic measures the gap between your two meet averages, adjusted for how much your times fluctuate (the noise).
+print("This is the p-value for the following meets: ", p_val) #  In statistics, you need a p-value below 0.05 (a 5% chance of luck) to claim a result is "real."
