@@ -1,6 +1,7 @@
 import pandas as pd
 from scipy import stats
 import matplotlib.pyplot as plt 
+import statsmodels.formula.api as smf
 
 df_swimming=pd.read_csv("Swim_Data.csv")
 #Add the condition for when it is a person's first time swimming that event and they won't have a seed time.
