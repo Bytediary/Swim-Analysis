@@ -7,6 +7,9 @@ df_swimming=pd.read_csv("Swim_Data.csv")
 #Add the condition for when it is a person's first time swimming that event and they won't have a seed time.
 df_swimming["Seed_Time_Seconds"]=df_swimming["Seed_Time_Seconds"].fillna("N/A(First Time)")
 
+#Add the condition where date is mixed up in format.
+df_swimming["Date"]=pd.to_datetime(df_swimming["Date"],format="mixed")
+
 #Goal 1: Create helper columns that help you find in percentage and seconds how much time you dropped or increased.
 #There are some string(object) values of the column Seed_Time_Seconds so i have to do the following code to get rid of that.
 clean_data=df_swimming[df_swimming["Seed_Time_Seconds"]!="N/A(First Time)"].copy() #.copy() in this case stops us for getting SettingWithCopyWarning.
@@ -48,3 +51,23 @@ for type in keys:
         break
 print("This is the t-statistic for the following meets: ", t_stat) # The T-statistic measures the gap between your two meet averages, adjusted for how much your times fluctuate (the noise).
 print("This is the p-value for the following meets: ", p_val) #  In statistics, you need a p-value below 0.05 (a 5% chance of luck) to claim a result is "real."
+
+
+#Goal 3: Create a scatter plot that looks at Wind_Chill_F(basically how cold you actually are considering the wind and weather) and Percentage_Improvement. Also create a regression table to look at Correlation(R) and R^2.
+clean_data=df_swimming[(df_swimming["Percentage_Improvement"]!="N/A(First Time)") & (df_swimming["Wind_Chill_F"]!="N/A(First Time)")].copy()
+clean_data["Percentage_Improvement"]=pd.to_numeric(clean_data["Percentage_Improvement"],errors="coerce")
+clean_data["Wind_Chill_F"]=pd.to_numeric(clean_data["Wind_Chill_F"],errors="coerce") #Unless we do this pandas will treat Wind_Chill_F column as object data type
+plt.figure(figsize=(10,6))
+plt.scatter(clean_data["Wind_Chill_F"],clean_data["Percentage_Improvement"],c=clean_data["Percentage_Improvement"],cmap="Set1")
+plt.xlabel("Wind_Chill_F(basically how cold you actually are considering the wind and weather)")
+plt.ylabel("Percentage_Improvement")
+plt.title("Does weather affect Performance?")
+plt.colorbar()
+plt.show()
+
+
+#Using Linear Regression to figure out relationship between Wind_Chill_F and Percentage_Improvement
+model=smf.ols("Percentage_Improvement ~ Wind_Chill_F",data=clean_data)
+results=model.fit()
+print(results.summary())
+
