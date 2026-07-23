@@ -19,7 +19,7 @@ df_swimming["Seconds_Dropped"]=clean_data["Seed_Time_Seconds"]-clean_data["Final
 df_swimming["Percentage_Improvement"]=round((df_swimming["Seconds_Dropped"]/clean_data["Seed_Time_Seconds"])*100,2) #Negative means added time and positive means decreased time. I used round function to make it more readable.
 df_swimming["Seconds_Dropped"]=df_swimming["Seconds_Dropped"].fillna("N/A(First Time)")
 df_swimming["Percentage_Improvement"]=df_swimming["Percentage_Improvement"].fillna("N/A(First Time)")
-print(df_swimming.to_string()) #.to_String() to print the whole DataFrame at once.
+print(df_swimming.to_string()) #.to_string() to print the whole DataFrame at once.
 
 
 #Goal 2: Create a Bar Chart and see if there is a relationship(p-value) between the Meet_Type and the Percentage_Improvement.
@@ -71,3 +71,29 @@ model=smf.ols("Percentage_Improvement ~ Wind_Chill_F",data=clean_data)
 results=model.fit()
 print(results.summary())
 
+#Goal 4: Does weather affect different Pool_Measures? (essentially seeing how much I improve based on Pool_Measure and weather)
+clean_data=df_swimming[(df_swimming["Pool_Measure"]!="N/A(First Time)") & (df_swimming["Wind_Chill_F"]!="N/A(First Time)") & (df_swimming["Percentage_Improvement"]!="N/A(First Time)")].copy()
+clean_data["Percentage_Improvement"]=pd.to_numeric(clean_data["Percentage_Improvement"],errors="coerce")
+clean_data["Wind_Chill_F"]=pd.to_numeric(clean_data["Wind_Chill_F"],errors="coerce")
+for measure in clean_data["Pool_Measure"].unique():
+    poolmeasure=clean_data[clean_data["Pool_Measure"]==measure]
+    model=smf.ols("Percentage_Improvement ~ Wind_Chill_F",data=poolmeasure).fit()
+    print(model.summary())
+    plt.figure(figsize=(10,6))
+    plt.scatter(poolmeasure["Wind_Chill_F"],poolmeasure["Percentage_Improvement"],c=poolmeasure["Percentage_Improvement"],cmap="Set1")
+    plt.xlabel("Wind_Chill_F(basically how cold you actually are considering the wind and weather)")
+    plt.ylabel(f"Percentage_Improvement for {measure}")
+    plt.title("Does weather affect the performance on each type of pool measure?")
+    plt.colorbar()
+    plt.show()
+
+#Comparing all Pool_Measure
+pm=dict()
+for measure in clean_data["Pool_Measure"].unique():
+    pm_average=round(clean_data[clean_data["Pool_Measure"]==measure]["Percentage_Improvement"].mean(),2)
+    pm[measure]=float(pm_average)
+plt.bar(x=pm.keys(),height=pm.values(),color="teal",edgecolor="blue")
+plt.title("Does Pool Measure Affect Performance?")
+plt.xlabel("Pool Measure")
+plt.ylabel("Average Percentage Improvement")
+plt.show() #Keep in mind one pool measure may have more improvement because there were more rows where that had that pool measure.
