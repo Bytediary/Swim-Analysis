@@ -65,11 +65,11 @@ plt.title("Does weather affect Performance?")
 plt.colorbar()
 plt.show()
 
-
 #Using Linear Regression to figure out relationship between Wind_Chill_F and Percentage_Improvement
 model=smf.ols("Percentage_Improvement ~ Wind_Chill_F",data=clean_data)
 results=model.fit()
 print(results.summary())
+
 
 #Goal 4: Does weather affect different Pool_Measures? (essentially seeing how much I improve based on Pool_Measure and weather)
 clean_data=df_swimming[(df_swimming["Pool_Measure"]!="N/A(First Time)") & (df_swimming["Wind_Chill_F"]!="N/A(First Time)") & (df_swimming["Percentage_Improvement"]!="N/A(First Time)")].copy()
