@@ -3,7 +3,8 @@
 This project helps you see how different conditions (like weather or meet types) affect your swim times.
 
 ## What the Project Does
-This project takes a spreadsheet of swim times and looks for patterns. It calculates whether you got faster or slower in a race, and checks if things like **Championship vs. Invitational meets** or the **outdoor temperature** changed how well you swam.
+
+This project takes a spreadsheet of swim times and looks for patterns. **Instead of using fake example data, the code was built completely around actual, real-world swim logs so it handles real racing scenarios.** It calculates whether you got faster or slower in a race, and checks if factors like **Championship vs. Invitational meets** or the **outdoor temperature** changed how well you swam.
 
 ## Why the Project Is Useful
 It is hard to compare different swim events just by looking at seconds. Dropping 2 seconds in a short 50 Free is huge, but dropping 2 seconds in a long 500 Free is very small. 
