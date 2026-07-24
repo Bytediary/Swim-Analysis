@@ -1,9 +1,9 @@
+# Swim Performance Analysis
+
 ## My Learning Journey (How I Built This)
 I am a 12-year-old developer and competitive swimmer. I wanted to see how real-world conditions affect racing times. 
 
 I used AI to help me generate the initial skeleton code and help write parts of this text, but **100% of the debugging, logic design, and problem-solving was done by me.** Every time the code broke—like when I got the `SettingWithCopyWarning` or columns turned into text instead of numbers—I asked the AI to explain the error. Then, I fixed the bugs myself, researched the parameters, and wrote down exactly what every single function does line-by-line in a physical notebook.
-
-# Swim Performance Analysis
 
 This project helps you see how different conditions (like weather or meet types) affect your swim times.
 
