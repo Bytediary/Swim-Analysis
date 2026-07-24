@@ -15,7 +15,7 @@ This project is useful because it turns your time drops into a simple percentage
 When you run this script on your data, it looks at your races from different angles to find things that simple averages completely miss:
 
 * **Averages vs. The Clutch Factor:** A standard statistical test only looks at your *average* time drop. This can look weird if you swam average times in your secondary events at a big meet. This tool fixes that by calculating a **Clutch Win Percentage** to show how *frequently* you actually beat your seed times. This proves if you are good at stepping up under pressure!
-* **Weather vs. Pool Lengths:** By automatically breaking your data down by pool types (SCY, SCM, LCM), the script separates your pure swimming from your wall turns. It shows you exactly how much outdoor stuff like wind speed and cold weather actually slows you down when you don't have a lot of turns to save you.
+* **Weather vs. Pool Lengths:** By automatically breaking your data down by pool types (SCY, SCM, LCM), the script separates your pure swimming from your wall turns. It shows you exactly how much outdoor factors like wind speed and cold weather actually slows you down when you don't have a lot of turns to save you.
 
 ## How to Get Started
 Follow these simple steps to run the project on your computer:
