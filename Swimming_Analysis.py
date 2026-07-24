@@ -90,10 +90,39 @@ for measure in clean_data["Pool_Measure"].unique():
 #Comparing all Pool_Measure
 pm=dict()
 for measure in clean_data["Pool_Measure"].unique():
-    pm_average=round(clean_data[clean_data["Pool_Measure"]==measure]["Percentage_Improvement"].mean(),2)
-    pm[measure]=float(pm_average)
+    improved_swims=clean_data[(clean_data["Pool_Measure"]==measure) & (clean_data["Percentage_Improvement"]>0)]["Percentage_Improvement"].count()
+    total_swims=clean_data[(clean_data["Pool_Measure"]==measure)]["Percentage_Improvement"].count()
+    win_pct=(improved_swims/total_swims)*100
+    pm[measure]=float(win_pct)
 plt.bar(x=pm.keys(),height=pm.values(),color="teal",edgecolor="blue")
 plt.title("Does Pool Measure Affect Performance?")
 plt.xlabel("Pool Measure")
 plt.ylabel("Average Percentage Improvement")
 plt.show() #Keep in mind one pool measure may have more improvement because there were more rows where that had that pool measure.
+
+
+#Goal 5: Checks if wind speed slows me down based on each pool measure and using percentage(Different from Goal 2) to see if i drop more type based on Meet_Type
+clean_data=df_swimming[(df_swimming["Wind_Speed_MPH"]!="N/A(First Time)") & (df_swimming["Pool_Measure"]!= "N/A(First Time)") & (df_swimming["Percentage_Improvement"]!="N/A(First Time)") & (df_swimming["Meet_Type"]!="N/A(First Time)")].copy()
+clean_data["Wind_Speed_MPH"]=pd.to_numeric(clean_data["Wind_Speed_MPH"],errors="coerce")
+clean_data["Percentage_Improvement"]=pd.to_numeric(clean_data["Percentage_Improvement"],errors="coerce")
+for measure in clean_data["Pool_Measure"].unique():
+    helper_df=clean_data[clean_data["Pool_Measure"]==measure]
+    plt.scatter(helper_df["Wind_Speed_MPH"],helper_df["Percentage_Improvement"],c=helper_df["Percentage_Improvement"],cmap="Set1")
+    plt.title("Does Wind Speed affect Performance for specific pool measures?")
+    plt.xlabel("Wind Speed(MPH)")
+    plt.ylabel(f"Percentage Improvement for {measure}")
+    plt.colorbar()
+    plt.show()
+
+#Using percentage to see if i drop more time based on each meet type(Using percentage so that the output isn't biased towards the meet type where i added more data)
+clutch_performance=dict()
+for type in clean_data["Meet_Type"].unique():
+    clutch_win=clean_data[(clean_data["Meet_Type"]==type) & (clean_data["Percentage_Improvement"]>0)]["Percentage_Improvement"].count()
+    total_swims=clean_data[(clean_data["Meet_Type"]==type)]["Percentage_Improvement"].count()
+    clutch_pct=(clutch_win/total_swims)*100
+    clutch_performance[type]=clutch_pct
+plt.bar(clutch_performance.keys(),height=clutch_performance.values(),color="teal",edgecolor="blue")
+plt.title("Which Type of meet are you good at?")
+plt.xlabel("Meet Type")
+plt.ylabel("Percentage of dropped time")
+plt.show()
