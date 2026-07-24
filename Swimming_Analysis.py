@@ -32,7 +32,7 @@ for type in clean_data["Meet_Type"].unique():
 plt.bar(x=meet_type.keys(),height=meet_type.values(),color="teal",edgecolor="blue")
 plt.title("Does Type Of Meet Affect Performance?")
 plt.xlabel("Type of Meet")
-plt.ylabel("Average Percentage Improvement")
+plt.ylabel("Average Percentage Improvement") # Made a better way of representing this on the last goal
 plt.show() # Even though the bar chart is showing that there is less improvement when swimming in championship meets, keep in mind that there are less championship meets in the csv compared to invitational meets.
 
 #Running the sample t-tests including the fact that there might be more than two types of meets:
