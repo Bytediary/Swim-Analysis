@@ -26,7 +26,7 @@ Follow these simple steps to run the project on your computer:
 
 1. **Install Python Libraries:** Open your terminal and install the tool needed to read spreadsheets:
    ```bash
-   pip install pandas scipy statsmodels
+  pip install pandas scipy statsmodels matplotlib
    ```
 2. **Get Your Spreadsheet:** Download your spreadsheet from Google Sheets as a `.csv` file. 
 3. **Name the File:** Name your file exactly `Swim_Data.csv` and put it in the same folder as your Python script.
