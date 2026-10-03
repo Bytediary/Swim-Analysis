@@ -37,12 +37,3 @@ If you get stuck or have questions about how to set up your spreadsheet, you can
 
 ## Who Maintains the Project
 This project is built and maintained by me! Anyone is welcome to suggest new ideas or help improve the code.
-2. **Get Your Spreadsheet:** Download your spreadsheet from Google Sheets as a `.csv` file. 
-3. **Name the File:** Name your file exactly `Swim_Data.csv` and put it in the same folder as your Python script.
-4. **Run the Code:** Run your Python script to see your swim summaries.
-
-## Where to Get Help
-If you get stuck or have questions about how to set up your spreadsheet, you can click the **Issues** tab at the top of this GitHub page and type your question there.
-
-## Who Maintains the Project
-This project is built and maintained by me! Anyone is welcome to suggest new ideas or help improve the code.
